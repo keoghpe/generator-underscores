@@ -1,33 +1,36 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    compass: {
-      dist: {
+    watch: {
+      sass: {
+        files: ['css/sass/*.{scss,sass}','sass/**/*.{scss,sass}','sass/_partials/**/*.{scss,sass}'],
+        tasks: ['sass:dist']
+      },
+      livereload: {
+        files: ['*.html', '*.php', 'js/**/*.{js,json}', 'css/*.css','img/**/*.{png,jpg,jpeg,gif,webp,svg}'],
         options: {
-          sassDir: 'css/sass',
-          cssDir: 'css',
-          imagesDir: 'images',
-          javascriptsDir: 'js',
-          fontsDir: 'fonts',
-          outputStyle: 'compact',
-          relativeAssets: true,
-          noLineComments: true
+          livereload: true
         }
       }
     },
-    watch: {
+    sass: {
       options: {
-        livereload: true
+        sourceMap: true
       },
-      compass: {
-        files: ['css/sass/*.scss'],
-        tasks: ['compass']
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'css/sass',
+          src: ['*.{scss,sass}'],
+          dest: 'css/',
+          ext: '.css'
+        }]
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['compass', 'watch']);
+  grunt.registerTask('default', ['sass', 'watch']);
 };

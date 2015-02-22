@@ -5,27 +5,6 @@ var yeoman = require('yeoman-generator');
 var fs = require('fs');
 var chalk = require('chalk');
 
-var hello =
-chalk.blue.bold("\n ______________") +
-chalk.blue.bold("\n< Hello, you!  >") +
-chalk.blue.bold("\n --------------") +
-chalk.red("\n      ") + chalk.blue.bold("\\") + chalk.red("                    / \\  //\\") +
-chalk.red("\n       ") + chalk.blue.bold("\\") + chalk.red("    |\\___/|      /   \\//  \\\\") +
-chalk.red("\n            /") + chalk.yellow("0  0") + chalk.red("  \\__  /    //  | \\ \\") +
-chalk.red("\n           /     /  \\/_/    //   |  \\  \\") +
-chalk.red("\n           @_^_@'/   \\/_   //    |   \\   \\") +
-chalk.yellow("\n           //") + chalk.red("_^_/     \\/_ //     |    \\    \\") +
-chalk.yellow("\n        ( //)") + chalk.red(" |        \\///      |     \\     \\") +
-chalk.yellow("\n      ( / /) ") + chalk.red("_|_ /   )  //       |      \\     _\\") +
-chalk.yellow("\n    ( // /) ") + chalk.red("'/,_ _ _/  ( ; -.    |    _ _\\.-~        .-~~~^-.") +
-chalk.yellow("\n  (( / / )) ") + chalk.red(",-{        _      `-.|.-~-.           .~         `.") +
-chalk.yellow("\n (( // / ))  ") + chalk.red("'/\\      /                 ~-. _ .-~      .-~^-.  \\") +
-chalk.yellow("\n (( /// ))      ") + chalk.red("`.   {            }                   /      \\  \\") +
-chalk.yellow("\n  (( / ))     ") + chalk.red(".----~-.\\        \\-'                 .~         \\  `. \\^-.") +
-"\n             " + chalk.red("///.----..>        \\             _ -~             `.  ^-`  ^-_") +
-"\n               " + chalk.red("///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~") +
-"\n                                                                  " + chalk.red("/.-~          ");
-
 var WpUnderscoresGenerator = module.exports = function WpUnderscoresGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
@@ -42,7 +21,7 @@ WpUnderscoresGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // have Yeoman greet the user.
-  console.log(hello);
+  console.log("Build a badass wordpress theme!");
 
   var prompts = [
   {
@@ -73,7 +52,7 @@ WpUnderscoresGenerator.prototype.askFor = function askFor() {
   {
     type: 'confirm',
     name: 'sassBootstrap',
-    message: 'Would you like to include sass-bootstrap?',
+    message: 'Would you like to include bootstrap with sass?',
     default: false
   }
   ];
@@ -85,6 +64,7 @@ WpUnderscoresGenerator.prototype.askFor = function askFor() {
     this.authoruri = props.authoruri;
     this.themedescription = props.themedescription;
     this.sassBootstrap = props.sassBootstrap;
+
     cb();
   }.bind(this));
 };
@@ -173,6 +153,6 @@ WpUnderscoresGenerator.prototype.addfiles = function addfiles() {
 
 WpUnderscoresGenerator.prototype.sassboostrap = function sassboostrap() {
   if (this.sassBootstrap) {
-    this.bowerInstall([ 'sass-bootstrap' ], { save: true });
+    this.bowerInstall([ 'bootstrap-sass-official' ], { save: true });
   }
 };
